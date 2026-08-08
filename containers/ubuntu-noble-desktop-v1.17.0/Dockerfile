@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM kasmweb/ubuntu-noble-desktop:1.17.0@sha256:26da4f4c0ae5e713f5b6830e744b5ddc837a207b554dbe234cb2dc42f9aa15b4
+FROM kasmweb/ubuntu-noble-desktop:1.17.0
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG TARGETARCH
