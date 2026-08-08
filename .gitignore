@@ -1,55 +1,42 @@
-# .gitignore
-
-# 运行环境
+# 本地环境
 **/.DS_Store
 **/.local/
 **/.venv/
 **/.conda/
 **/.task/remote/
 
-# node_modules
+# 依赖与构建输出
 **/node_modules/
 **/*.tsbuildinfo
+**/bin/
+**/dist/
+**/build/
+**/out/
+**/*.vsix
 
-# 构建输出
-bin-*
-bin/
-dist/
-build/
-out/
-.next/
-*.vsix
-[0-9]*-
-
-# 生成文件
+# 生成文件、日志和临时文件
 **/gen/
 **/__pycache__/
 **/*.py[cod]
-
-# 临时文件
 **/*.bak
 **/*.log
 **/*.tmp
 **/*.out
 **/*.temp
 **/*.cache
-
-# 临时目录
 tmp/**
 log/**
 logs/**
 temp/**
 cache/**
 
-# secret files
+# 密钥与本地配置
 .env
 .env.*
 !.env.example
 config/config.yaml
 
-# AI tools
-.playwright-mcp
-
-# Go workspace
-go.work
-go.work.sum
+# IDE 与 AI 工具
+.claude/
+.cursor/
+.playwright-mcp/
