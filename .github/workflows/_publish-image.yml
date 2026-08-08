@@ -1,10 +1,16 @@
-name: ubuntu-noble-desktop-v1.17.0
+name: publish-image
 
 on:
-  push:
-    tags:
-      - "build/ubuntu-noble-desktop-v1.17.0/**"
-  workflow_dispatch:
+  workflow_call:
+    inputs:
+      image_channel:
+        description: Image tag namespace
+        required: true
+        type: string
+      dockerfile:
+        description: Dockerfile path relative to the repository root
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -13,7 +19,7 @@ permissions:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  IMAGE_CHANNEL: ubuntu-noble-desktop-v1.17.0
+  IMAGE_CHANNEL: ${{ inputs.image_channel }}
 
 jobs:
   build:
@@ -70,7 +76,7 @@ jobs:
         uses: docker/build-push-action@v7
         with:
           context: .
-          file: containers/ubuntu-noble-desktop-v1.17.0/Dockerfile
+          file: ${{ inputs.dockerfile }}
           platforms: ${{ matrix.platform }}
           outputs: type=image,name=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }},push-by-digest=true,name-canonical=true,push=true
           labels: ${{ steps.meta.outputs.labels }}
@@ -93,7 +99,7 @@ jobs:
           __main
 
       - name: Upload digest
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: ${{ matrix.artifact }}
           path: /tmp/digests/*

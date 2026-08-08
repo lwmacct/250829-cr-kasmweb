@@ -24,4 +24,4 @@ tasks:
   image:check:
     desc: 检查 Dockerfile 语法
     cmds:
-      - docker buildx build --check -f containers/ubuntu-noble-desktop-v1.17.0/Dockerfile .
+      - docker buildx build --check -f containers/ubuntu-noble-desktop-v1.19.0/Dockerfile .

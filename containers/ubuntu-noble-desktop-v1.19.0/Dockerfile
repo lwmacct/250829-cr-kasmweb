@@ -1,14 +1,12 @@
 # syntax=docker/dockerfile:1
 
-FROM kasmweb/ubuntu-noble-desktop:1.17.0
+FROM kasmweb/ubuntu-noble-desktop:1.19.0
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG TARGETARCH
-ARG BUILD_APT_MIRROR=https://mirrors.ustc.edu.cn/ubuntu
-ARG BUILD_APT_PORTS_MIRROR=https://mirrors.ustc.edu.cn/ubuntu-ports
 ARG RUNTIME_APT_MIRROR=https://mirrors.ustc.edu.cn/ubuntu
 ARG RUNTIME_APT_PORTS_MIRROR=https://mirrors.ustc.edu.cn/ubuntu-ports
-ARG IMAGE_CHANNEL=ubuntu-noble-desktop-v1.17.0
+ARG IMAGE_CHANNEL=ubuntu-noble-desktop-v1.19.0
 ARG VCS_REF=unknown
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -20,12 +18,6 @@ __main() {
   _source=/etc/apt/sources.list.d/ubuntu.sources
   test -f "$_source"
   cp "$_source" /etc/apt/ubuntu.sources.origin
-  case "$TARGETARCH" in
-    amd64) _mirror="${BUILD_APT_MIRROR%/}" ;;
-    arm64) _mirror="${BUILD_APT_PORTS_MIRROR%/}" ;;
-    *) echo "不支持 TARGETARCH=$TARGETARCH" >&2; return 1 ;;
-  esac
-  sed -E -i "s@^URIs:.*@URIs: $_mirror@g" "$_source"
   cat "$_source"
   apt-get update
   apt-get install -y --no-install-recommends ca-certificates curl wget sudo

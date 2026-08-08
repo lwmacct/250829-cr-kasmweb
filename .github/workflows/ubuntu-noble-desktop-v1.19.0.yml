@@ -1,0 +1,22 @@
+name: ubuntu-noble-desktop-v1.19.0
+
+on:
+  push:
+    tags:
+      - "build/ubuntu-noble-desktop-v1.19.0/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: publish-ubuntu-noble-desktop-v1.19.0
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    uses: ./.github/workflows/_publish-image.yml
+    with:
+      image_channel: ubuntu-noble-desktop-v1.19.0
+      dockerfile: containers/ubuntu-noble-desktop-v1.19.0/Dockerfile
