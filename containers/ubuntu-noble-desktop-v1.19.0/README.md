@@ -11,4 +11,4 @@ ubuntu-noble-desktop-v1.19.0-latest
 ubuntu-noble-desktop-v1.19.0-sha-<12位提交ID>
 ```
 
-本地不提供镜像构建脚本。请从仓库根目录创建版本族构建 tag，交由 GitHub Actions 发布。
+本地不提供镜像构建脚本。影响镜像的文件合并到 `main` 后，由 GitHub Actions 自动发布；也可以通过版本族 workflow 手动重建。

@@ -2,8 +2,13 @@ name: ubuntu-noble-desktop-v1.19.0
 
 on:
   push:
-    tags:
-      - "build/ubuntu-noble-desktop-v1.19.0/**"
+    branches:
+      - main
+    paths:
+      - "containers/ubuntu-noble-desktop-v1.19.0/**"
+      - "!containers/ubuntu-noble-desktop-v1.19.0/README.md"
+      - ".github/workflows/ubuntu-noble-desktop-v1.19.0.yml"
+      - ".github/workflows/publish-image.yml"
   workflow_dispatch:
 
 permissions:
@@ -12,7 +17,7 @@ permissions:
 
 concurrency:
   group: publish-ubuntu-noble-desktop-v1.19.0
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   publish:

@@ -23,14 +23,17 @@ task image:check
 
 ## 发布
 
-只有版本族专属的构建 tag 才会触发该镜像工作流：
+影响镜像的文件合并到 `main` 后，GitHub Actions 会自动构建并发布版本族 `latest` 和对应的 12 位 SHA 标签。触发范围包括：
+
+- `containers/ubuntu-noble-desktop-v1.19.0/**`，版本族 README 除外
+- `.github/workflows/ubuntu-noble-desktop-v1.19.0.yml`
+- `.github/workflows/publish-image.yml`
+
+不修改源码时可以手动重建：
 
 ```shell
-git tag build/ubuntu-noble-desktop-v1.19.0/20260808-1
-git push origin build/ubuntu-noble-desktop-v1.19.0/20260808-1
+gh workflow run ubuntu-noble-desktop-v1.19.0.yml --ref main
 ```
-
-该提交会由远程 CI 构建并发布版本族 `latest` 和对应的 12 位 SHA 标签。其他镜像版本族的 tag 不会触发本工作流。
 
 ## 开发环境
 
